@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="ILEP Learning Guide 2: interactive quick-action guide to recognise and manage leprosy reactions.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leprosy Reactions Quick-Action Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;1,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a field reference. Brand header, three working tools up top, then the guide as numbered chapters with a sticky chapter bar. */
+:root{
+  --navy:#002C59; --gold:#FBC24E;
+  --bg:#F5F7FA; --surface:#FFFFFF; --ink:#13202E; --muted:#4E5B6A; --line:#D7DDE4; --soft:#EDF1F5;
+  --t1:#1D6BB0; --t1-bg:#E6F0FA; --t2:#B8530F; --t2-bg:#FCEEE2;
+  --ok:#1C6E40; --ok-bg:#E5F3EA; --ref:#B42318; --ref-bg:#FCEBE9; --pend:#7A5200; --pend-bg:#FFF3D1;
+  --display:"Montserrat", "Arial Black", system-ui, sans-serif;
+  --body:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1620; --surface:#15212D; --ink:#E8EDF2; --muted:#A6B2BF; --line:#2B3A49; --soft:#1C2A38;
+    --t1:#6FB0EA; --t1-bg:#16293C; --t2:#F09A5B; --t2-bg:#33231A;
+    --ok:#6CCB93; --ok-bg:#163024; --ref:#FF8A7D; --ref-bg:#3A1D1B; --pend:#F3C766; --pend-bg:#352A12;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1620; --surface:#15212D; --ink:#E8EDF2; --muted:#A6B2BF; --line:#2B3A49; --soft:#1C2A38;
+  --t1:#6FB0EA; --t1-bg:#16293C; --t2:#F09A5B; --t2-bg:#33231A;
+  --ok:#6CCB93; --ok-bg:#163024; --ref:#FF8A7D; --ref-bg:#3A1D1B; --pend:#F3C766; --pend-bg:#352A12;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+p{margin:0}
+a{color:var(--t1)}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+/* header */
+.brand{background:#FFFFFF;border-bottom:4px solid var(--gold)}
+.brand .wrap{display:flex;align-items:center;gap:20px;padding-top:18px;padding-bottom:18px;flex-wrap:wrap}
+.brand img{height:52px;width:auto;display:block}
+.brand .meta{display:flex;flex-direction:column;gap:2px;color:#002C59}
+.brand .meta b{font-family:var(--display);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.brand .meta span{font-size:13px;color:#4E5B6A}
+.hero{background:var(--navy);color:#fff}
+.hero .wrap{padding-top:32px;padding-bottom:30px;display:flex;flex-direction:column;gap:12px}
+.hero h1{font-size:clamp(28px,5vw,44px);font-weight:800}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero p{max-width:640px;color:#D6E0EB;font-size:17px}
+.flags{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.flag{font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#fff}
+
+/* view switch + sub nav */
+.bar{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(0,20,40,.06)}
+.tabs{display:grid;grid-template-columns:1fr 1fr;max-width:1040px;margin:0 auto;padding:0 20px;gap:0}
+.tab{display:flex;align-items:center;gap:12px;padding:14px 16px 12px;text-decoration:none;color:var(--muted);border-bottom:4px solid transparent;min-height:60px}
+.tab svg{width:24px;height:24px;flex:none}
+.tab span{display:flex;flex-direction:column;line-height:1.2}
+.tab b{font-family:var(--display);font-size:18px;font-weight:800;color:inherit}
+.tab small{font-size:12.5px;color:var(--muted)}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--navy);border-bottom-color:var(--gold)}
+:root[data-theme="dark"] .tab[aria-selected="true"]{color:var(--gold)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:var(--gold)}}
+@media (max-width:480px){.tab small{display:none}.tab{padding:12px 8px 10px;min-height:52px}.tabs{padding:0 12px}}
+.sub{display:flex;gap:6px;overflow-x:auto;padding:10px 20px;max-width:1040px;margin:0 auto;scrollbar-width:none;border-top:1px solid var(--line)}
+.sub[hidden]{display:none}
+.sub::-webkit-scrollbar{display:none}
+.sub a{flex:none;text-decoration:none;color:var(--ink);font-size:14px;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--soft);white-space:nowrap}
+.sub a:hover{background:var(--t1-bg);color:var(--t1)}
+#sub-tools a{background:transparent;border:1.5px solid var(--line)}
+[data-view][hidden]{display:none}
+.view-intro{display:flex;flex-direction:column;gap:4px}
+.view-intro h2{font-size:clamp(22px,3.4vw,28px);font-weight:800}
+.view-intro p{color:var(--muted);max-width:68ch}
+
+main{display:flex;flex-direction:column;gap:28px;padding:28px 0 56px}
+section.ch{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:18px}
+@media (max-width:560px){section.ch{padding:20px 16px;border-radius:12px}.wrap{padding:0 12px}}
+.ch-head{display:flex;gap:14px;align-items:flex-start}
+.ch-num{flex:none;width:44px;height:44px;border-radius:12px;background:var(--navy);color:var(--gold);font-family:var(--display);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center}
+.ch-head h2{font-size:clamp(22px,3.4vw,28px);font-weight:800}
+.ch-head p{color:var(--muted);margin-top:4px;max-width:65ch}
+h3{font-size:18px;font-weight:700;margin-top:6px}
+.lead{max-width:68ch}
+ul.clean,ol.clean{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:5px}
+
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.grid3,.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.grid2,.grid3,.grid4{grid-template-columns:minmax(0,1fr)}}
+.card{border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;background:var(--surface)}
+.card h4{margin:0;font-size:15px;font-weight:700}
+.t1{border-color:var(--t1);background:var(--t1-bg)} .t1 h4{color:var(--t1)}
+.t2{border-color:var(--t2);background:var(--t2-bg)} .t2 h4{color:var(--t2)}
+
+/* action boxes */
+.act{border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;border:1.5px solid}
+.act .tag{font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.act .tag svg{width:18px;height:18px;flex:none}
+.act .if{font-weight:700}
+.act ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:4px}
+.do{border-color:var(--ok);background:var(--ok-bg)} .do .tag{color:var(--ok)}
+.urgent,.refer{border-color:var(--ref);background:var(--ref-bg)} .urgent .tag,.refer .tag{color:var(--ref)}
+.note{border-color:var(--t1);background:var(--t1-bg)} .note .tag{color:var(--t1)}
+
+.pend{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--pend);background:var(--pend-bg);border:1px dashed var(--pend);border-radius:5px;padding:1px 7px;vertical-align:1px;max-width:100%}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:var(--soft);font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+tbody tr:last-child td{border-bottom:0}
+td.k{font-weight:700;white-space:nowrap}
+th.c1{color:var(--t1)} th.c2{color:var(--t2)}
+.num{font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font-size:12.5px;font-weight:700;border-radius:999px;padding:2px 10px}
+.p-hi{background:var(--ref-bg);color:var(--ref)} .p-md{background:var(--pend-bg);color:var(--pend)} .p-lo{background:var(--ok-bg);color:var(--ok)}
+.p-ok{background:var(--ok-bg);color:var(--ok)} .p-ref{background:var(--ref-bg);color:var(--ref)}
+
+/* tools */
+.tools{display:grid;grid-template-columns:1.25fr 1fr;gap:16px}
+@media (max-width:860px){.tools{grid-template-columns:minmax(0,1fr)}}
+.tool{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.tool header{display:flex;flex-direction:column;gap:2px}
+.tool header .eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--t1)}
+.tool header h2{font-size:22px;font-weight:800}
+.tool header p{color:var(--muted);font-size:14.5px}
+.stack{display:flex;flex-direction:column;gap:16px}
+.q{font-size:18px;font-weight:700;line-height:1.35}
+.qhelp{color:var(--muted);font-size:14.5px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;width:100%;min-height:52px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);cursor:pointer;font-size:15.5px;line-height:1.35}
+.opt:hover{border-color:var(--t1);background:var(--t1-bg)}
+.opt .dot{flex:none;width:12px;height:12px;border-radius:50%}
+.crumbs{display:flex;gap:6px;flex-wrap:wrap}
+.crumb{font-size:12.5px;padding:3px 9px;border-radius:999px;background:var(--soft);color:var(--muted)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{min-height:44px;padding:10px 16px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);font-weight:600;cursor:pointer}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+.result{border-radius:14px;padding:18px;border:2px solid;display:flex;flex-direction:column;gap:10px}
+.result h3{font-size:21px;margin:0}
+.result.ok{border-color:var(--ok);background:var(--ok-bg)} .result.ok h3{color:var(--ok)}
+.result.ref{border-color:var(--ref);background:var(--ref-bg)} .result.ref h3{color:var(--ref)}
+.result.neu{border-color:var(--t1);background:var(--t1-bg)} .result.neu h3{color:var(--t1)}
+.result ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:4px}
+
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:9px 16px;min-height:44px;cursor:pointer;font-weight:600}
+.seg button[aria-pressed="true"]{background:var(--navy);color:#fff}
+label.lbl{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.03em}
+input[type=range]{width:100%;accent-color:var(--navy);height:32px}
+input[type=date]{min-height:44px;padding:8px 10px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface)}
+.dose-big{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.dose-big b{font-family:var(--display);font-size:56px;line-height:1;color:var(--navy)}
+:root[data-theme="dark"] .dose-big b{color:var(--gold)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .dose-big b{color:var(--gold)}}
+.stairs{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:2px;align-items:end;height:110px}
+.stairs div{background:var(--t1-bg);border-radius:3px 3px 0 0;position:relative}
+.stairs div.on{background:var(--navy)}
+:root[data-theme="dark"] .stairs div.on{background:var(--gold)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .stairs div.on{background:var(--gold)}}
+.stairs-x{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:2px;font-size:11px;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:15px}
+.kv dt{color:var(--muted)} .kv dd{margin:0;font-weight:600}
+
+.review{background:var(--pend-bg);border:1.5px dashed var(--pend);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.review h2{font-size:18px;color:var(--pend)}
+.review ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:15px}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:13.5px}
+footer .wrap{display:flex;flex-direction:column;gap:6px}
+</style>
+</head>
+<body>
+
+<div class="brand">
+  <div class="wrap">
+    <img src="data:image/png;base64,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" alt="ILEP logo">
+    <div class="meta"><b>Learning Guide 2 · 2nd edition</b><span>International Federation of Anti-Leprosy Associations</span></div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>How to recognise and manage <em>leprosy reactions</em></h1>
+    <p>A quick-action guide for health workers. Find the right action at the point of care: what you see, what it means, what to do, and when to refer.</p>
+    <div class="flags"><span class="flag">Use with ILEP Learning Guide 4</span><span class="flag">Follows WHO and national programme guidelines</span><span class="flag">Draft for review</span></div>
+  </div>
+</div>
+
+<div class="bar">
+  <div class="tabs" role="tablist" aria-label="Choose a view">
+    <a class="tab" id="tab-tools" href="#tools" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg><span><b>Tools</b><small>Decide, dose, missed doses</small></span></a>
+    <a class="tab" id="tab-guide" href="#guide" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7M8 11h7"/></svg><span><b>Guide</b><small>8 chapters to read</small></span></a>
+  </div>
+  <nav class="sub" id="sub-tools" aria-label="Tools">
+    <a href="#decide">Decision helper</a><a href="#dose">Dose finder</a><a href="#missed">Missed doses</a>
+  </nav>
+  <nav class="sub" id="sub-guide" aria-label="Guide chapters" hidden>
+    <a href="#recognise">1 Recognise</a><a href="#assess">2 Nerve check</a><a href="#compare">3 Type 1 or 2</a><a href="#type1">4 Type 1</a><a href="#type2">5 Type 2 (ENL)</a><a href="#support">6 Support</a><a href="#pain">7 Neuropathic pain</a><a href="#lookup">8 Quick look-up</a><a href="#review">Under review</a>
+  </nav>
+</div>
+
+<main class="wrap">
+
+  <div data-view="tools" id="tools" class="stack" style="gap:20px">
+  <div class="view-intro"><h2>Tools for the consultation</h2><p>Quick answers while the person is with you. For the full explanation, open the <a href="#guide">Guide</a>.</p></div>
+  <div class="tools">
+    <section class="tool" id="decide" aria-labelledby="decide-h">
+      <header><span class="eyebrow">Tool 1</span><h2 id="decide-h">Decision helper</h2><p>Answer a few questions about the person in front of you.</p></header>
+      <div id="dh" class="stack" aria-live="polite"></div>
+    </section>
+
+    <div class="stack">
+      <section class="tool" id="dose" aria-labelledby="dose-h">
+        <header><span class="eyebrow">Tool 2</span><h2 id="dose-h">Prednisolone dose finder</h2><p>Standard 20-week course for severe Type 1 reaction (WHO 2020).</p></header>
+        <div class="row" style="align-items:center;justify-content:space-between">
+          <div class="seg" role="group" aria-label="Patient group">
+            <button type="button" id="g-adult" aria-pressed="true">Adult</button>
+            <button type="button" id="g-child" aria-pressed="false">Child</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <label class="lbl" for="start">Course started on (optional)</label>
+            <input type="date" id="start">
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <label class="lbl" for="wk">Week of the course: <span id="wk-out">1</span> of 20</label>
+          <input type="range" id="wk" min="1" max="20" value="1" step="1">
+        </div>
+        <div class="dose-big"><b id="dose-mg">40</b><span style="font-size:18px;font-weight:600">mg once daily</span></div>
+        <div>
+          <div class="stairs" id="stairs" aria-hidden="true"></div>
+          <div class="stairs-x" aria-hidden="true" id="stairs-x"></div>
+        </div>
+        <dl class="kv">
+          <dt>This step</dt><dd id="d-step"></dd>
+          <dt>Next change</dt><dd id="d-next"></dd>
+          <dt>Visits</dt><dd id="d-visit"></dd>
+        </dl>
+        <p class="qhelp" id="d-child-note" hidden>Children under 30 kg or under 14 years need a lower starting dose (0.5&#8211;1 mg/kg/day). <span class="pend">Schedule to confirm</span></p>
+      </section>
+
+      <section class="tool" id="missed" aria-labelledby="missed-h">
+        <header><span class="eyebrow">Tool 3</span><h2 id="missed-h">Missed steroid doses</h2><p>Contact the person, ask why, and test nerve function first.</p></header>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span class="lbl">How long was the break?</span>
+          <div class="seg" role="group" aria-label="Length of break">
+            <button type="button" id="b-short" aria-pressed="true">Under 4 weeks</button>
+            <button type="button" id="b-long" aria-pressed="false">4 weeks or more</button>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label class="lbl" for="nerves">What does the nerve check show?</label>
+          <select id="nerves" style="min-height:44px;padding:8px 10px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface)"></select>
+        </div>
+        <div id="m-out"></div>
+      </section>
+    </div>
+  </div>
+
+  </div>
+
+  <div data-view="guide" id="guide" class="stack" style="gap:28px" hidden>
+  <div class="view-intro"><h2>The guide</h2><p>Eight short chapters, from recognising a reaction to what to tell the person. The <a href="#tools">Tools</a> tab turns the key decisions into a few taps.</p></div>
+  <div class="review" role="note" id="review">
+    <h2>Content still under review</h2>
+    <p style="font-size:15px">Items marked <span class="pend">to confirm</span> differ between sections of the LG2 draft (16 Feb 2026) and await a Working Group decision:</p>
+    <ul>
+      <li>How recent nerve damage must be to start steroids: 6 months, 12 months or 52 weeks.</li>
+      <li>ENLIST cut-off for mild and moderate ENL (score 8 or less vs under 9).</li>
+      <li>Age for referral of children on steroids: under 12 (checklist) or under 18 (Annex C).</li>
+      <li>Visit interval when the dose is exactly 20 mg, and a lower schedule for children under 30 kg.</li>
+    </ul>
+  </div>
+
+  <!-- 1 RECOGNISE -->
+  <section class="ch" id="recognise">
+    <div class="ch-head"><div class="ch-num">1</div><div><h2>Recognise a leprosy reaction</h2><p>Reactions are sudden inflammation caused by the immune system attacking leprosy bacteria. They are the main cause of nerve damage and disability in leprosy.</p></div></div>
+    <h3>Who is at risk?</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Risk</th><th>Person with</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill p-hi">High</span></td><td>MB leprosy with thickened nerves or nerve function impairment (NFI)</td></tr>
+        <tr><td><span class="pill p-hi">High</span></td><td>Skin patches near a nerve trunk or around the eye</td></tr>
+        <tr><td><span class="pill p-hi">High</span></td><td>Hormonal change: puberty, pregnancy, childbirth</td></tr>
+        <tr><td><span class="pill p-hi">High</span></td><td>Bacteriological index above 3+</td></tr>
+        <tr><td><span class="pill p-md">Medium</span></td><td>Physical, psychological or behavioural stress</td></tr>
+        <tr><td><span class="pill p-lo">Lower</span></td><td>PB leprosy: 1&#8211;5 skin patches, no nerve enlargement</td></tr>
+      </tbody>
+    </table></div>
+    <div class="act note"><div class="tag">Remember</div><p>Reactions can happen <b>before</b> diagnosis, <b>during</b> MDT and <b>years after</b> MDT. Most happen in the first year; in MB leprosy they can come several years after treatment ends.</p></div>
+    <h3>At every visit, check three places</h3>
+    <div class="grid3">
+      <div class="card"><h4>Skin</h4><ul class="clean"><li>Patches newly red, swollen, warm or tender</li><li>New tender nodules</li><li>Swelling of hands and feet</li></ul></div>
+      <div class="card"><h4>Nerves</h4><ul class="clean"><li>Pain, burning or pins and needles</li><li>Tender or enlarged nerve</li><li>New loss of feeling or strength</li></ul></div>
+      <div class="card"><h4>Eyes</h4><ul class="clean"><li>Pain, redness, watering, light sensitivity</li><li>Recent loss of vision</li><li>Reduced blink or a gap when closing the eyelids</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 2 ASSESS -->
+  <section class="ch" id="assess">
+    <div class="ch-head"><div class="ch-num">2</div><div><h2>Check nerve function</h2><p>Do it at diagnosis and at every routine visit, and at least every 3 months during MDT. Record on the NFA form (Annex A) and compare with the last visit.</p></div></div>
+    <div class="grid2">
+      <div class="card"><h4>Step 1 · Feel the nerves</h4><p>Use the pads of your index and middle fingers. Record <b>N</b> normal, <b>E</b> enlarged or <b>T</b> tender. Watch the face for pain; don&#8217;t ask.</p>
+        <ul class="clean"><li><b>Ulnar:</b> groove on the inner elbow, elbow bent to 110&#176;</li><li><b>Median:</b> just above the wrist, between the tendons</li><li><b>Common peroneal:</b> outer leg, behind the head of the fibula</li><li><b>Posterior tibial:</b> behind and below the inner ankle bone</li></ul></div>
+      <div class="card"><h4>Step 2 · Test feeling</h4><p>4 sites on each palm and sole: <b>16 sites</b>. The person&#8217;s eyes are closed.</p>
+        <ul class="clean"><li>Best: monofilament, 2 g for the hand, 10 g for the foot</li><li>Otherwise: a ballpoint pen, using only its own weight</li><li>Record &#10003; felt or &#10007; not felt at each site</li></ul>
+        <p><b>Sensory loss</b> = not felt at 1 or more sites.</p></div>
+    </div>
+    <h3>Step 3 · Test muscle strength</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Nerve</th><th>Test</th><th>Record</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Facial</td><td>Close eyes gently, then tightly; look for a gap between the lids</td><td>Gap in mm (gentle and forced)</td></tr>
+        <tr><td class="k">Ulnar</td><td>Little finger out against resistance</td><td>S strong · W weak · P paralysed, or MRC 0&#8211;5</td></tr>
+        <tr><td class="k">Median</td><td>Thumb up against resistance</td><td>S · W · P, or MRC 0&#8211;5</td></tr>
+        <tr><td class="k">Common peroneal</td><td>Foot up against resistance</td><td>S · W · P, or MRC 0&#8211;5</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Step 4 · Compare with the last visit</h3>
+    <p class="lead">There is new nerve damage if a nerve is newly enlarged, painful or tender; more sites are not felt; a muscle is weaker; or there is a new or wider eyelid gap.</p>
+    <div class="act urgent"><div class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 3 2 21h20L12 3z"/><path d="M12 10v5M12 18v.5"/></svg>Urgent action</div>
+      <p class="if">New loss of nerve function, even with no pain and no inflamed skin</p>
+      <ol><li>This <b>is</b> a leprosy reaction. Treat now.</li><li>Start prednisolone without delay.</li><li>Record findings and how long the NFI has been there.</li><li>Full course if NFI started less than [6 / 12 months or 52 weeks] ago <span class="pend">to confirm</span></li><li>Refer if you suspect complications or are unsure about steroids.</li></ol></div>
+  </section>
+
+  <!-- 3 COMPARE -->
+  <section class="ch" id="compare">
+    <div class="ch-head"><div class="ch-num">3</div><div><h2>Type 1 or Type 2?</h2><p>Treating the nerve damage matters more than naming the type: it is treated much the same way in both.</p></div></div>
+    <div class="tbl"><table>
+      <thead><tr><th></th><th class="c1">Type 1 (reversal reaction)</th><th class="c2">Type 2 (ENL)</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Skin</td><td>Leprosy patches red, warm, swollen; new patches may appear</td><td>New tender red nodules, not on leprosy patches</td></tr>
+        <tr><td class="k">Nerves</td><td>Painful neuritis, with or without loss of feeling or strength</td><td>Same</td></tr>
+        <tr><td class="k">General</td><td>Feels well, little or no fever</td><td>Feels ill: fever, malaise, joint pain</td></tr>
+        <tr><td class="k">Eyes</td><td>Weak eyelid closure (lagophthalmos)</td><td>Red, painful eye (iridocyclitis, scleritis)</td></tr>
+        <tr><td class="k">Other</td><td>Swollen hands and feet</td><td>Swollen hands and feet, lymph nodes, testes</td></tr>
+        <tr><td class="k">Who</td><td>Borderline leprosy (BT, BB, BL)</td><td>Lepromatous leprosy (LL, BL)</td></tr>
+        <tr><td class="k">When</td><td>Often in the first 6 months of MDT; up to 5 years after</td><td>Usually later in MDT; can recur for years</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- 4 TYPE 1 -->
+  <section class="ch" id="type1">
+    <div class="ch-head"><div class="ch-num">4</div><div><h2>Manage Type 1 reaction</h2><p>More immune activity against leprosy bacilli inflames the skin and nerves.</p></div></div>
+    <div class="grid2">
+      <div class="card"><h4>Mild</h4><p>Red, swollen, warm patches. <b>No</b> nerve pain, tenderness or new NFI.</p><p><span class="pill p-ok">Local clinic</span></p></div>
+      <div class="card"><h4>Severe</h4><p>Tender nerve, new loss of feeling or strength, or acutely inflamed patches, especially on the face.</p><p><span class="pill p-ok">Local clinic</span> <span class="pill p-ref">Refer if complications</span></p></div>
+    </div>
+    <div class="grid2">
+      <div class="act do"><div class="tag">What to do · Mild</div>
+        <ol><li>Paracetamol 500 mg twice daily <b>or</b> ibuprofen 400 mg three times daily.</li><li>Reduce weekly or every 2 weeks, by response.</li><li>Check nerves and skin every visit; start steroids if nerves become involved.</li><li>Continue MDT.</li><li>Ask the person to come back at once if nerve pain, numbness or weakness starts.</li></ol></div>
+      <div class="act do"><div class="tag">What to do · Severe</div>
+        <ol><li>Start prednisolone now; do not wait.</li><li>Complete the pre-steroid checklist first.</li><li>Treat other conditions before or alongside (Annexes C and D).</li><li>Treat worms: mebendazole 100 mg twice daily for 3 days.</li><li>Use the standard schedule (<a href="#dose">dose finder</a>).</li><li>Continue MDT throughout.</li></ol></div>
+    </div>
+    <h3>Prednisolone schedule (WHO 2020), once daily in the morning</h3>
+    <div class="tbl"><table class="num">
+      <thead><tr><th>Weeks</th><th>1&#8211;2</th><th>3&#8211;4</th><th>5&#8211;8</th><th>9&#8211;12</th><th>13&#8211;16</th><th>17&#8211;20</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Adult</td><td><b>40 mg</b></td><td><b>30 mg</b></td><td><b>20 mg</b></td><td><b>15 mg</b></td><td><b>10 mg</b></td><td><b>5 mg</b></td></tr>
+        <tr><td class="k">Child</td><td>30 mg</td><td>25 mg</td><td>20 mg</td><td>15 mg</td><td>10 mg</td><td>5 mg</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Pre-steroid checklist</h3>
+    <div class="grid2">
+      <div class="card"><h4>A · Does the person need steroids?</h4><ul class="clean"><li>Loss of feeling in hands or feet</li><li>Weakness: eye closure, little finger, thumb, foot</li><li>Tender or painful nerve; reacting face patch</li></ul><p>Any YES and recent (<span class="pend">duration to confirm</span>) &#8594; start steroids.</p></div>
+      <div class="card"><h4>B · Special management</h4><ul class="clean"><li><b>Pregnancy</b> or <b>child</b> (<span class="pend">age to confirm</span>) &#8594; refer</li><li><b>Diabetes</b> &#8594; monitor glucose; refer if needed</li><li><b>High blood pressure</b> &#8594; monitor throughout</li><li><b>Cough or fever 3 weeks or more</b> &#8594; check for TB first</li><li><b>Infected ulcer or bone infection</b> &#8594; surgical review first</li><li><b>Mental illness</b> &#8594; involve a specialist</li><li><b>Fungal skin infection</b> &#8594; luliconazole cream alongside</li><li><b>Scabies</b> &#8594; treat the household first</li></ul></div>
+    </div>
+    <h3>Specific situations</h3>
+    <div class="grid2">
+      <div class="act urgent"><div class="tag">Urgent · Worse during steroids</div><ol><li>Do not stop steroids suddenly.</li><li>Consider a higher dose, or keep the current dose for longer.</li><li>Refer for specialist advice; keep the same dose meanwhile.</li></ol></div>
+      <div class="act urgent"><div class="tag">Emergency · Stopped high-dose steroids suddenly</div><ol><li>Look for low blood pressure, severe weakness, shock.</li><li>Restart steroids at once.</li><li>Give IV fluids if needed and admit to hospital.</li></ol></div>
+      <div class="act refer"><div class="tag">Refer · Lagophthalmos</div><ol><li>Measure the lid gap in mm, gentle and forced closure.</li><li>Teach eye protection: lubrication, glasses.</li><li>Start or continue steroids.</li><li>Refer to an eye specialist. See LG4.</li></ol></div>
+      <div class="card"><h4>Follow-up</h4><ul class="clean"><li>Every 2 weeks while above 20 mg; monthly below 20 mg</li><li>Each visit: side effects, blood pressure, glucose if possible, nerve function</li><li>After the course: review at 3 and 6 months</li><li>Warn that reactions and NFI can recur after a full course</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 5 TYPE 2 -->
+  <section class="ch" id="type2">
+    <div class="ch-head"><div class="ch-num">5</div><div><h2>Manage Type 2 reaction (ENL)</h2><p>A whole-body immune complex disease that can recur over months or years. People feel very unwell and need treatment, reassurance and hope: ENL eventually stops.</p></div></div>
+    <p class="lead">Score severity with the ENLIST ENL Severity Scale (Annex E): 10 items, 0&#8211;3 points each, maximum 30. <span class="pend">Mild / moderate cut-off to confirm</span></p>
+    <div class="tbl"><table>
+      <thead><tr><th></th><th>Mild</th><th>Moderate</th><th>Severe</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Skin</td><td>Few red tender nodules</td><td>Crops of painful nodules, low fever</td><td>Pustular, ulcerated or necrotic nodules; high fever</td></tr>
+        <tr><td class="k">Nerves</td><td>None</td><td>Possible</td><td>Acute severe neuritis</td></tr>
+        <tr><td class="k">Body</td><td>Mild joint pain, malaise</td><td>Swollen hands and feet; organs possibly involved</td><td>Lymph nodes, testes, organs involved</td></tr>
+        <tr><td class="k">Eyes</td><td>None</td><td>Possible</td><td>Iridocyclitis or scleritis</td></tr>
+        <tr><td class="k">Where</td><td><span class="pill p-ok">Local clinic</span></td><td><span class="pill p-ref">Referral centre</span></td><td><span class="pill p-ref">Referral centre</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="grid2">
+      <div class="act do"><div class="tag">What to do · Mild ENL</div><ol><li>Paracetamol 500 mg twice daily or ibuprofen 400 mg three times daily.</li><li>Reduce weekly or every 2 weeks, by response.</li><li>ENL often recurs: re-examine nerves, eyes and general health every visit.</li><li>Refer if it gets worse.</li></ol></div>
+      <div class="act refer"><div class="tag">Refer · Moderate or severe ENL</div><ol><li>Refer to a referral or tertiary centre.</li><li>Give painkillers while arranging referral.</li><li>Send the ENLIST score and current medicines.</li><li>The centre may give prednisolone 30&#8211;40 mg (moderate) or 40&#8211;60 mg (severe), clofazimine, or thalidomide.</li></ol></div>
+    </div>
+    <div class="act urgent"><div class="tag">Urgent · Red, painful or light-sensitive eye</div><p>Refer immediately to an eye specialist, whatever else you find. It may be iridocyclitis or scleritis; both threaten sight.</p></div>
+    <h3>Medicines used at referral centres</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Medicine</th><th>When</th><th>Key points</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Prednisolone</td><td>Moderate and severe ENL</td><td>Longer courses often needed; watch side effects closely</td></tr>
+        <tr><td class="k">Clofazimine</td><td>Chronic or recurrent ENL, with steroids</td><td>300 mg daily for 1 month, 200 mg for 3&#8211;6 months, then 100 mg. Takes 4&#8211;6 weeks to act. Skin darkening, abdominal pain</td></tr>
+        <tr><td class="k">Thalidomide</td><td>Severe chronic ENL not controlled by steroids</td><td>Specialist only. Strict pregnancy prevention; condoms for men. Not licensed in every country. See Annex F</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- 6 SUPPORT -->
+  <section class="ch" id="support">
+    <div class="ch-head"><div class="ch-num">6</div><div><h2>Prevent disability and support the person</h2><p>People with active reactions are at high risk of permanent damage, and of distress.</p></div></div>
+    <div class="grid3">
+      <div class="card"><h4>Prevent disability</h4><ul class="clean"><li>Teach self-care for numb hands and feet</li><li>Splint the limb to rest an inflamed nerve</li><li>Gentle active exercise as pain eases</li><li>Passive exercise to keep joints moving</li><li>Details in LG4</li></ul></div>
+      <div class="card"><h4>Messages for every person</h4><ul class="clean"><li>A reaction does not mean MDT has failed</li><li>Reactions can be treated; ENL eventually stops</li><li>Come back at once if it gets worse</li><li>Involve family; consider peer support</li></ul></div>
+      <div class="card"><h4>Watch for distress</h4><ul class="clean"><li>Anxiety about disability</li><li>Loss of hope after repeated ENL</li><li>Withdrawal, job loss, stigma</li><li>Psychosis or steroid dependence &#8594; refer</li></ul></div>
+    </div>
+    <div class="act do"><div class="tag">What to do · Anxiety, depression or loss of hope</div><ol><li>Listen without judgement; acknowledge the distress.</li><li>Give clear information about the condition and outlook.</li><li>Encourage family and community support.</li><li>Offer stress management, problem-solving or peer groups.</li><li>Refer to a psychologist, counsellor or psychiatrist if severe; link to social support.</li></ol></div>
+  </section>
+
+  <!-- 7 PAIN -->
+  <section class="ch" id="pain">
+    <div class="ch-head"><div class="ch-num">7</div><div><h2>Neuropathic pain</h2><p>A long-term result of nerve damage, often after MDT is finished.</p></div></div>
+    <div class="grid2">
+      <div class="card"><h4>Neuropathic pain</h4><ul class="clean"><li>Tingling, burning, shooting or pricking pain</li><li><b>No</b> nerve tenderness</li><li><b>No</b> new NFI</li><li>Often after MDT</li></ul></div>
+      <div class="card"><h4>Leprosy reaction</h4><ul class="clean"><li>Tender nerve</li><li>New or worse loss of feeling or strength</li><li>Inflamed patches or ENL nodules</li><li>Before, during or after MDT</li></ul></div>
+    </div>
+    <div class="act do"><div class="tag">What to do · Pain without tenderness or new NFI</div><ol><li>This is likely neuropathic pain, not a new reaction.</li><li>Do not give steroids.</li><li>Paracetamol, then ibuprofen, then add a neuropathic medicine.</li><li>Review and adjust at follow-up.</li></ol></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Medicine</th><th>Dose in the draft</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Gabapentin</td><td class="num">100&#8211;300 mg, 2&#8211;3 times daily</td><td>First choice</td></tr>
+        <tr><td class="k">Pregabalin</td><td class="num">75&#8211;150 mg, 1&#8211;3 times daily</td><td>Alternative</td></tr>
+        <tr><td class="k">Duloxetine</td><td class="num">20&#8211;60 mg, 2&#8211;3 times daily <span class="pend">to confirm</span></td><td>Useful if also depressed</td></tr>
+        <tr><td class="k">Amitriptyline</td><td class="num">5&#8211;25 mg once daily</td><td>Low-dose add-on</td></tr>
+        <tr><td class="k">Nortriptyline</td><td class="num">25 mg, 1&#8211;2 times daily</td><td>Alternative to amitriptyline</td></tr>
+        <tr><td class="k">Clonazepam</td><td class="num">0.5&#8211;2 mg, 2&#8211;3 times daily</td><td>Difficult cases</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- 8 LOOKUP -->
+  <section class="ch" id="lookup">
+    <div class="ch-head"><div class="ch-num">8</div><div><h2>Quick look-up</h2><p>Steroid side effects, when to refer, and what to tell every person.</p></div></div>
+    <h3>Steroid side effects: check at every visit</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Sign</th><th>What to do</th></tr></thead>
+      <tbody>
+        <tr><td>Thirst, passing a lot of urine</td><td>Urine glucose; if positive, refer for diabetes treatment</td></tr>
+        <tr><td>Stomach pain</td><td>Stop aspirin; antacid or pantoprazole 40 mg daily</td></tr>
+        <tr><td>Warm, swollen hand or foot (sepsis)</td><td>Refer urgently for surgery</td></tr>
+        <tr><td>Cough or fever 3 weeks or more</td><td>Sputum for AFB; refer for TB check</td></tr>
+        <tr><td>Diarrhoea with blood or mucus</td><td>Oral rehydration; stool exam; antibiotics or anti-amoeba treatment</td></tr>
+        <tr><td>Round face, acne, more hair</td><td>No treatment; goes when steroids stop</td></tr>
+        <tr><td>High blood pressure</td><td>Refer for investigation</td></tr>
+        <tr><td>Wants to stop suddenly</td><td><b>Never.</b> Risk of shock and collapse; reduce step by step</td></tr>
+      </tbody>
+    </table></div>
+    <div class="grid2">
+      <div class="act refer"><div class="tag">When to refer</div><ul class="clean">
+        <li>Severe Type 1 with complications or reasons not to give steroids</li>
+        <li>All moderate and severe Type 2 (ENL)</li>
+        <li>Pregnancy; children (<span class="pend">age to confirm</span>)</li>
+        <li>Infected ulcers or bone infection</li>
+        <li>Any eye involvement in Type 2</li>
+        <li>ENL not controlled, or steroid-dependent</li>
+        <li>Severe mental illness or psychosis</li>
+        <li>NFI getting worse on steroids: keep the dose and refer</li></ul></div>
+      <div class="act note"><div class="tag">Tell every person on steroids</div><ul class="clean">
+        <li>Take it every day, with breakfast</li>
+        <li>Never stop suddenly</li>
+        <li>Come back at once if pain, numbness or weakness gets worse</li>
+        <li>A reaction is not MDT failing: keep taking MDT</li>
+        <li>The course lasts 20&#8211;24 weeks; finishing it helps stop the reaction coming back</li>
+        <li>Know the warning signs: pain, tingling, numbness, weakness, eye problems</li></ul></div>
+    </div>
+  </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>ILEP Learning Guide 2: How to recognise and manage leprosy reactions</b>, 2nd edition. Interactive quick-action version, draft for review by the ILEP Technical Commission Working Group on Patient Management and Disability.</p>
+    <p>Based on the LG2 draft of 16 February 2026. Always follow your national programme guidelines. For disability prevention see ILEP Learning Guide 4.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---------- Decision helper ----------
+  var el=document.getElementById('dh');
+  var C={ok:'var(--ok)',ref:'var(--ref)',t1:'var(--t1)',t2:'var(--t2)',neu:'var(--muted)'};
+  var N={
+    start:{q:'Does the person have a red, painful or light-sensitive eye, or new loss of vision?',help:'Check this first, whatever else you find.',o:[['Yes','eye','ref'],['No','signs','neu']]},
+    signs:{q:'Are there any signs of a reaction in the skin, nerves or eyes?',help:'Inflamed patches, new nodules, pain or tingling, a tender nerve, new loss of feeling or strength, a new eyelid gap.',o:[['Yes','pattern','neu'],['No','none','neu']]},
+    pattern:{q:'Which picture fits best?',o:[['Leprosy patches inflamed; the person feels well','t1sev','t1'],['New tender red nodules, not on patches; often fever, feels ill','t2sev','t2'],['Burning, tingling or shooting pain, with no tender nerve and no new loss of function','pain','neu']]},
+    t1sev:{q:'Is there a tender or painful nerve, new loss of feeling or strength, or a reacting patch on the face?',o:[['Yes','t1severe','ref'],['No, skin only','t1mild','ok']]},
+    t2sev:{q:'Any of these: many nodules, fever, ulcerating nodules, joint pain, nerve, eye or organ involvement?',help:'Score with ENLIST if you can. Mild / moderate cut-off is still to be confirmed.',o:[['Yes','t2refer','ref'],['No, a few nodules only','t2mild','ok']]}
+  };
+  var R={
+    eye:{k:'ref',t:'Refer immediately to an eye specialist',s:['This may be iridocyclitis or scleritis; both threaten sight.','If already on steroids for ENL, keep the dose until the specialist decides.','Teach the person to report eye symptoms at once.'],link:['#type2','Type 2: eye emergencies']},
+    none:{k:'neu',t:'No reaction now: continue MDT',s:['Record today’s nerve check to compare next time.','Remind the person of the warning signs: pain, tingling, numbness, weakness, eye problems.'],link:['#recognise','What to check every visit']},
+    t1mild:{k:'ok',t:'Mild Type 1 reaction: treat at this clinic',s:['Paracetamol 500 mg twice daily or ibuprofen 400 mg three times daily.','Reduce weekly or every 2 weeks, then stop.','Check nerves every visit; start steroids if nerves become involved.','Continue MDT.'],link:['#type1','Type 1 in full']},
+    t1severe:{k:'ok',t:'Severe Type 1 reaction: start prednisolone',s:['Complete the pre-steroid checklist. Any referral item: refer.','Treat worms (mebendazole 100 mg twice daily, 3 days).','Standard 20-week course: adult 40 mg, child 30 mg to start.','Continue MDT. Visit every 2 weeks while above 20 mg.'],pend:'Nerve damage must be recent: duration limit to confirm',link:['#dose','Open the dose finder']},
+    t2mild:{k:'ok',t:'Mild Type 2 reaction (ENL): treat at this clinic',s:['Paracetamol 500 mg twice daily or ibuprofen 400 mg three times daily.','Re-examine nerves, eyes and general health each visit.','ENL often recurs. Refer if it gets worse.'],pend:'ENLIST cut-off to confirm',link:['#type2','Type 2 in full']},
+    t2refer:{k:'ref',t:'Moderate or severe ENL: refer',s:['Refer to a referral or tertiary centre.','Give painkillers while arranging referral.','Send the ENLIST score and current medicines.','Continue MDT.'],link:['#type2','Type 2 in full']},
+    pain:{k:'neu',t:'Likely neuropathic pain, not a new reaction',s:['Do not give steroids.','Paracetamol, then ibuprofen, then a neuropathic medicine such as gabapentin.','Re-check nerves next visit: a tender nerve or new loss of function means a reaction.'],link:['#pain','Neuropathic pain in full']}
+  };
+  var path=[];
+  function h(tag,attrs,html){var e=document.createElement(tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(html!=null)e.innerHTML=html;return e;}
+  function render(id){
+    el.innerHTML='';
+    if(path.length){var cr=h('div',{'class':'crumbs'});path.forEach(function(p){cr.appendChild(h('span',{'class':'crumb'},p.a));});el.appendChild(cr);}
+    if(N[id]){
+      var n=N[id];
+      el.appendChild(h('p',{'class':'q'},n.q));
+      if(n.help)el.appendChild(h('p',{'class':'qhelp'},n.help));
+      var box=h('div',{'class':'opts'});
+      n.o.forEach(function(o){
+        var b=h('button',{'type':'button','class':'opt'});
+        b.appendChild(h('span',{'class':'dot','style':'background:'+C[o[2]]}));
+        b.appendChild(h('span',{},o[0]));
+        b.addEventListener('click',function(){path.push({id:id,a:o[0].split(';')[0].split(',')[0]});render(o[1]);});
+        box.appendChild(b);
+      });
+      el.appendChild(box);
+    } else {
+      var r=R[id];
+      var res=h('div',{'class':'result '+r.k});
+      res.appendChild(h('h3',{},r.t));
+      var ol=h('ol');r.s.forEach(function(s){ol.appendChild(h('li',{},s));});res.appendChild(ol);
+      if(r.pend)res.appendChild(h('p',{},'<span class="pend">'+r.pend+'</span>'));
+      res.appendChild(h('p',{},'<a href="'+r.link[0]+'">'+r.link[1]+' &#8594;</a>'));
+      el.appendChild(res);
+    }
+    var row=h('div',{'class':'row'});
+    if(path.length){var bk=h('button',{'type':'button','class':'btn'},'Back');bk.addEventListener('click',function(){var p=path.pop();render(p.id);});row.appendChild(bk);
+      var rs=h('button',{'type':'button','class':'btn'},'Start again');rs.addEventListener('click',function(){path=[];render('start');});row.appendChild(rs);}
+    if(row.children.length)el.appendChild(row);
+  }
+  render('start');
+
+  // ---------- Dose finder ----------
+  var S={adult:[40,40,30,30,20,20,20,20,15,15,15,15,10,10,10,10,5,5,5,5],child:[30,30,25,25,20,20,20,20,15,15,15,15,10,10,10,10,5,5,5,5]};
+  var grp='adult';
+  var wk=document.getElementById('wk'),start=document.getElementById('start');
+  var stairs=document.getElementById('stairs'),sx=document.getElementById('stairs-x');
+  for(var i=1;i<=20;i++){stairs.appendChild(document.createElement('div'));var s=document.createElement('span');s.textContent=(i===1||i%4===1||i===20)?i:'';sx.appendChild(s);}
+  function fmt(d){return d.toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'});}
+  function upd(){
+    var w=+wk.value, arr=S[grp], mg=arr[w-1];
+    document.getElementById('wk-out').textContent=w;
+    document.getElementById('dose-mg').textContent=mg;
+    var max=arr[0];
+    Array.prototype.forEach.call(stairs.children,function(d,j){d.style.height=(arr[j]/max*100)+'%';d.className=(arr[j]===mg)?'on':'';});
+    var a=w,b=w;while(a>1&&arr[a-2]===mg)a--;while(b<20&&arr[b]===mg)b++;
+    var st=start.value?new Date(start.value+'T00:00:00'):null;
+    function dayOf(week){var d=new Date(st);d.setDate(d.getDate()+(week-1)*7);return d;}
+    document.getElementById('d-step').textContent='Weeks '+a+(b>a?'–'+b:'')+(st?' ('+fmt(dayOf(a))+' to '+fmt(new Date(dayOf(b+1).getTime()-864e5))+')':'');
+    document.getElementById('d-next').textContent=b>=20?'Course ends after week 20':(arr[b]+' mg from week '+(b+1)+(st?' ('+fmt(dayOf(b+1))+')':''));
+    var v=document.getElementById('d-visit');
+    if(mg>20)v.textContent='Every 2 weeks';else if(mg<20)v.textContent='Every month';else v.innerHTML='Every 2 weeks or monthly <span class="pend">to confirm</span>';
+    document.getElementById('d-child-note').hidden=(grp!=='child');
+  }
+  function setG(g){grp=g;document.getElementById('g-adult').setAttribute('aria-pressed',g==='adult');document.getElementById('g-child').setAttribute('aria-pressed',g==='child');upd();}
+  document.getElementById('g-adult').addEventListener('click',function(){setG('adult');});
+  document.getElementById('g-child').addEventListener('click',function(){setG('child');});
+  wk.addEventListener('input',upd);
+  start.addEventListener('change',function(){
+    if(start.value){var d=new Date(start.value+'T00:00:00'),t=new Date();t.setHours(0,0,0,0);var w=Math.floor((t-d)/864e5/7)+1;if(w>=1&&w<=20)wk.value=w;}
+    upd();
+  });
+  upd();
+
+  // ---------- Missed doses ----------
+  var brk='short',sel=document.getElementById('nerves'),out=document.getElementById('m-out');
+  var M={
+    short:[['stable','Stable or better','ok','Continue the course as planned','Keep the same dose and schedule.'],
+           ['worse','Worse','neu','Restart the whole course','Go back to week 1 of the schedule.']],
+    long:[['gone','The original problem has gone','ok','Stop steroids','Do not restart.'],
+          ['persist','Nerve damage still there, and recent','neu','Restart the whole course','Make sure the person understands why it must not be interrupted.','Recent means under 6 months in the draft: to confirm'],
+          ['worse','Nerve damage is worse','ref','Restart the course and refer','Refer to a specialist for other treatment options.']]
+  };
+  function fill(){sel.innerHTML='';M[brk].forEach(function(m){var o=document.createElement('option');o.value=m[0];o.textContent=m[1];sel.appendChild(o);});mUpd();}
+  function mUpd(){
+    var m=M[brk].filter(function(x){return x[0]===sel.value;})[0];
+    out.innerHTML='<div class="result '+m[2]+'"><h3>'+m[3]+'</h3><p>'+m[4]+'</p>'+(m[5]?'<p><span class="pend">'+m[5]+'</span></p>':'')+'<p class="qhelp">Counsel the person on completing the full course.</p></div>';
+  }
+  function setB(b){brk=b;document.getElementById('b-short').setAttribute('aria-pressed',b==='short');document.getElementById('b-long').setAttribute('aria-pressed',b==='long');fill();}
+  document.getElementById('b-short').addEventListener('click',function(){setB('short');});
+  document.getElementById('b-long').addEventListener('click',function(){setB('long');});
+  sel.addEventListener('change',mUpd);
+  fill();
+
+  // ---------- Views ----------
+  function route(){
+    var id=location.hash.slice(1)||'tools';
+    var t=document.getElementById(id);
+    var holder=t?(t.hasAttribute('data-view')?t:t.closest('[data-view]')):null;
+    var view=holder?holder.getAttribute('data-view'):'tools';
+    ['tools','guide'].forEach(function(v){
+      document.querySelector('[data-view="'+v+'"]').hidden=(v!==view);
+      document.getElementById('sub-'+v).hidden=(v!==view);
+      document.getElementById('tab-'+v).setAttribute('aria-selected',v===view);
+    });
+    if(t&&!t.hasAttribute('data-view'))t.scrollIntoView();else window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',route);
+  route();
+})();
+</script>
+</body>
+</html>
