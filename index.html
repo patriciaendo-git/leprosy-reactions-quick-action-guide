@@ -90,6 +90,10 @@ section.ch{background:var(--surface);border:1px solid var(--line);border-radius:
 .ch-num{flex:none;width:44px;height:44px;border-radius:12px;background:var(--navy);color:var(--gold);font-family:var(--display);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center}
 .ch-head h2{font-size:clamp(22px,3.4vw,28px);font-weight:800}
 .ch-head p{color:var(--muted);margin-top:4px;max-width:65ch}
+.subsec{display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line);padding-top:20px;margin-top:6px}
+.subsec>h3{font-size:20px;font-weight:800;margin:0;display:flex;gap:10px;align-items:baseline}
+.subsec>h3 .sn{color:var(--t1);font-size:16px}
+.subsec>p.si{color:var(--muted);max-width:65ch}
 h3{font-size:18px;font-weight:700;margin-top:6px}
 .lead{max-width:68ch}
 ul.clean,ol.clean{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:5px}
@@ -179,6 +183,9 @@ input[type=date]{min-height:44px;padding:8px 10px;border:1.5px solid var(--line)
 .review{background:var(--pend-bg);border:1.5px dashed var(--pend);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
 .review h2{font-size:18px;color:var(--pend)}
 .review ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:15px}
+
+.src{border-top:1px solid var(--line);padding-top:10px;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.src b{color:var(--ink);font-weight:700}
 footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:13.5px}
 footer .wrap{display:flex;flex-direction:column;gap:6px}
 </style>
@@ -203,13 +210,13 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 <div class="bar">
   <div class="tabs" role="tablist" aria-label="Choose a view">
     <a class="tab" id="tab-tools" href="#tools" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg><span><b>Tools</b><small>Decide, dose, missed doses</small></span></a>
-    <a class="tab" id="tab-guide" href="#guide" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7M8 11h7"/></svg><span><b>Guide</b><small>8 chapters to read</small></span></a>
+    <a class="tab" id="tab-guide" href="#guide" role="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7M8 11h7"/></svg><span><b>Guide</b><small>5 chapters + quick look-up</small></span></a>
   </div>
   <nav class="sub" id="sub-tools" aria-label="Tools">
     <a href="#decide">Decision helper</a><a href="#dose">Dose finder</a><a href="#missed">Missed doses</a>
   </nav>
   <nav class="sub" id="sub-guide" aria-label="Guide chapters" hidden>
-    <a href="#recognise">1 Recognise</a><a href="#assess">2 Nerve check</a><a href="#compare">3 Type 1 or 2</a><a href="#type1">4 Type 1</a><a href="#type2">5 Type 2 (ENL)</a><a href="#support">6 Support</a><a href="#pain">7 Neuropathic pain</a><a href="#lookup">8 Quick look-up</a><a href="#review">Under review</a>
+    <a href="#recognise">1 Recognise</a><a href="#assess">1.3 Nerve check</a><a href="#compare">1.4 Type 1 or 2</a><a href="#type1">2 Type 1</a><a href="#type2">3 Type 2 (ENL)</a><a href="#support">4 Complications</a><a href="#pain">5 Neuropathic pain</a><a href="#lookup">Quick look-up</a><a href="#review">Under review</a>
   </nav>
 </div>
 
@@ -221,6 +228,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
     <section class="tool" id="decide" aria-labelledby="decide-h">
       <header><span class="eyebrow">Tool 1</span><h2 id="decide-h">Decision helper</h2><p>Answer a few questions about the person in front of you.</p></header>
       <div id="dh" class="stack" aria-live="polite"></div>
+      <p class="src"><b>Where this comes from.</b> Quick-Action Guide: at-a-glance decision guide; Type 1 vs Type 2 key differences; mild vs severe Type 1; ENL severity classification; ENL eye emergencies; Chapter 5 (neuropathic pain vs reaction). LG2 draft (16 Feb 2026): sections 1.5&#8211;1.9, 2.6, 3.4, 3.6 and Chapter 5. The order of the questions was added for this tool: the eye comes first because the guide says to refer a red, painful eye whatever the other findings.</p>
     </section>
 
     <div class="stack">
@@ -251,6 +259,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
           <dt>Visits</dt><dd id="d-visit"></dd>
         </dl>
         <p class="qhelp" id="d-child-note" hidden>Children under 30 kg or under 14 years need a lower starting dose (0.5&#8211;1 mg/kg/day). <span class="pend">Schedule to confirm</span></p>
+        <p class="src"><b>Where this comes from.</b> Quick-Action Guide: prednisolone dosage schedules for adults and children (WHO 2020); monitoring during and after treatment. LG2 draft (16 Feb 2026): Tables 10&#8211;11, sections 2.7.4&#8211;2.7.5. Working out the week from the start date was added for this tool.</p>
       </section>
 
       <section class="tool" id="missed" aria-labelledby="missed-h">
@@ -267,6 +276,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
           <select id="nerves" style="min-height:44px;padding:8px 10px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface)"></select>
         </div>
         <div id="m-out"></div>
+        <p class="src"><b>Where this comes from.</b> Quick-Action Guide: &#8220;What to do if&#8221; boxes for treatment interrupted for less than 4 weeks and for 4 weeks or more. LG2 draft (16 Feb 2026): section 2.7.5, &#8220;What to do if a person misses an appointment&#8221;. The draft does not say what to do when the problem has gone after a break of less than 4 weeks, so that option is not offered.</p>
       </section>
     </div>
   </div>
@@ -274,7 +284,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
   </div>
 
   <div data-view="guide" id="guide" class="stack" style="gap:28px" hidden>
-  <div class="view-intro"><h2>The guide</h2><p>Eight short chapters, from recognising a reaction to what to tell the person. The <a href="#tools">Tools</a> tab turns the key decisions into a few taps.</p></div>
+  <div class="view-intro"><h2>The guide</h2><p>Five chapters, as in Learning Guide 2, plus a quick look-up of side effects, referral and patient messages. The <a href="#tools">Tools</a> tab turns the key decisions into a few taps.</p></div>
   <div class="review" role="note" id="review">
     <h2>Content still under review</h2>
     <p style="font-size:15px">Items marked <span class="pend">to confirm</span> differ between sections of the LG2 draft (16 Feb 2026) and await a Working Group decision:</p>
@@ -288,8 +298,8 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 
   <!-- 1 RECOGNISE -->
   <section class="ch" id="recognise">
-    <div class="ch-head"><div class="ch-num">1</div><div><h2>Recognise a leprosy reaction</h2><p>Reactions are sudden inflammation caused by the immune system attacking leprosy bacteria. They are the main cause of nerve damage and disability in leprosy.</p></div></div>
-    <h3>Who is at risk?</h3>
+    <div class="ch-head"><div class="ch-num">1</div><div><h2>How to recognise leprosy reactions</h2><p>Reactions are sudden inflammation caused by the immune system attacking leprosy bacteria. They are the main cause of nerve damage and disability in leprosy.</p></div></div>
+    <div class="subsec"><h3><span class="sn">1.1</span>Who is at risk?</h3>
     <div class="tbl"><table>
       <thead><tr><th>Risk</th><th>Person with</th></tr></thead>
       <tbody>
@@ -302,17 +312,15 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
       </tbody>
     </table></div>
     <div class="act note"><div class="tag">Remember</div><p>Reactions can happen <b>before</b> diagnosis, <b>during</b> MDT and <b>years after</b> MDT. Most happen in the first year; in MB leprosy they can come several years after treatment ends.</p></div>
-    <h3>At every visit, check three places</h3>
+    </div>
+    <div class="subsec"><h3><span class="sn">1.2</span>At every visit, check three places</h3>
     <div class="grid3">
       <div class="card"><h4>Skin</h4><ul class="clean"><li>Patches newly red, swollen, warm or tender</li><li>New tender nodules</li><li>Swelling of hands and feet</li></ul></div>
       <div class="card"><h4>Nerves</h4><ul class="clean"><li>Pain, burning or pins and needles</li><li>Tender or enlarged nerve</li><li>New loss of feeling or strength</li></ul></div>
       <div class="card"><h4>Eyes</h4><ul class="clean"><li>Pain, redness, watering, light sensitivity</li><li>Recent loss of vision</li><li>Reduced blink or a gap when closing the eyelids</li></ul></div>
     </div>
-  </section>
-
-  <!-- 2 ASSESS -->
-  <section class="ch" id="assess">
-    <div class="ch-head"><div class="ch-num">2</div><div><h2>Check nerve function</h2><p>Do it at diagnosis and at every routine visit, and at least every 3 months during MDT. Record on the NFA form (Annex A) and compare with the last visit.</p></div></div>
+    </div>
+    <div class="subsec" id="assess"><h3><span class="sn">1.3</span>Check nerve function</h3><p class="si">Do it at diagnosis and at every routine visit, and at least every 3 months during MDT. Record on the NFA form (Annex A) and compare with the last visit.</p>
     <div class="grid2">
       <div class="card"><h4>Step 1 · Feel the nerves</h4><p>Use the pads of your index and middle fingers. Record <b>N</b> normal, <b>E</b> enlarged or <b>T</b> tender. Watch the face for pain; don&#8217;t ask.</p>
         <ul class="clean"><li><b>Ulnar:</b> groove on the inner elbow, elbow bent to 110&#176;</li><li><b>Median:</b> just above the wrist, between the tendons</li><li><b>Common peroneal:</b> outer leg, behind the head of the fibula</li><li><b>Posterior tibial:</b> behind and below the inner ankle bone</li></ul></div>
@@ -320,7 +328,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
         <ul class="clean"><li>Best: monofilament, 2 g for the hand, 10 g for the foot</li><li>Otherwise: a ballpoint pen, using only its own weight</li><li>Record &#10003; felt or &#10007; not felt at each site</li></ul>
         <p><b>Sensory loss</b> = not felt at 1 or more sites.</p></div>
     </div>
-    <h3>Step 3 · Test muscle strength</h3>
+    <h4 style="margin:0;font-size:16px">Step 3 · Test muscle strength</h4>
     <div class="tbl"><table>
       <thead><tr><th>Nerve</th><th>Test</th><th>Record</th></tr></thead>
       <tbody>
@@ -330,16 +338,13 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
         <tr><td class="k">Common peroneal</td><td>Foot up against resistance</td><td>S · W · P, or MRC 0&#8211;5</td></tr>
       </tbody>
     </table></div>
-    <h3>Step 4 · Compare with the last visit</h3>
+    <h4 style="margin:0;font-size:16px">Step 4 · Compare with the last visit</h4>
     <p class="lead">There is new nerve damage if a nerve is newly enlarged, painful or tender; more sites are not felt; a muscle is weaker; or there is a new or wider eyelid gap.</p>
     <div class="act urgent"><div class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 3 2 21h20L12 3z"/><path d="M12 10v5M12 18v.5"/></svg>Urgent action</div>
       <p class="if">New loss of nerve function, even with no pain and no inflamed skin</p>
       <ol><li>This <b>is</b> a leprosy reaction. Treat now.</li><li>Start prednisolone without delay.</li><li>Record findings and how long the NFI has been there.</li><li>Full course if NFI started less than [6 / 12 months or 52 weeks] ago <span class="pend">to confirm</span></li><li>Refer if you suspect complications or are unsure about steroids.</li></ol></div>
-  </section>
-
-  <!-- 3 COMPARE -->
-  <section class="ch" id="compare">
-    <div class="ch-head"><div class="ch-num">3</div><div><h2>Type 1 or Type 2?</h2><p>Treating the nerve damage matters more than naming the type: it is treated much the same way in both.</p></div></div>
+    </div>
+    <div class="subsec" id="compare"><h3><span class="sn">1.4</span>Type 1 or Type 2?</h3><p class="si">Treating the nerve damage matters more than naming the type: it is treated much the same way in both.</p>
     <div class="tbl"><table>
       <thead><tr><th></th><th class="c1">Type 1 (reversal reaction)</th><th class="c2">Type 2 (ENL)</th></tr></thead>
       <tbody>
@@ -352,11 +357,12 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
         <tr><td class="k">When</td><td>Often in the first 6 months of MDT; up to 5 years after</td><td>Usually later in MDT; can recur for years</td></tr>
       </tbody>
     </table></div>
+    </div>
   </section>
 
   <!-- 4 TYPE 1 -->
   <section class="ch" id="type1">
-    <div class="ch-head"><div class="ch-num">4</div><div><h2>Manage Type 1 reaction</h2><p>More immune activity against leprosy bacilli inflames the skin and nerves.</p></div></div>
+    <div class="ch-head"><div class="ch-num">2</div><div><h2>How to manage Type 1 reaction</h2><p>More immune activity against leprosy bacilli inflames the skin and nerves.</p></div></div>
     <div class="grid2">
       <div class="card"><h4>Mild</h4><p>Red, swollen, warm patches. <b>No</b> nerve pain, tenderness or new NFI.</p><p><span class="pill p-ok">Local clinic</span></p></div>
       <div class="card"><h4>Severe</h4><p>Tender nerve, new loss of feeling or strength, or acutely inflamed patches, especially on the face.</p><p><span class="pill p-ok">Local clinic</span> <span class="pill p-ref">Refer if complications</span></p></div>
@@ -391,7 +397,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 
   <!-- 5 TYPE 2 -->
   <section class="ch" id="type2">
-    <div class="ch-head"><div class="ch-num">5</div><div><h2>Manage Type 2 reaction (ENL)</h2><p>A whole-body immune complex disease that can recur over months or years. People feel very unwell and need treatment, reassurance and hope: ENL eventually stops.</p></div></div>
+    <div class="ch-head"><div class="ch-num">3</div><div><h2>How to manage Type 2 reaction (ENL)</h2><p>A whole-body immune complex disease that can recur over months or years. People feel very unwell and need treatment, reassurance and hope: ENL eventually stops.</p></div></div>
     <p class="lead">Score severity with the ENLIST ENL Severity Scale (Annex E): 10 items, 0&#8211;3 points each, maximum 30. <span class="pend">Mild / moderate cut-off to confirm</span></p>
     <div class="tbl"><table>
       <thead><tr><th></th><th>Mild</th><th>Moderate</th><th>Severe</th></tr></thead>
@@ -421,7 +427,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 
   <!-- 6 SUPPORT -->
   <section class="ch" id="support">
-    <div class="ch-head"><div class="ch-num">6</div><div><h2>Prevent disability and support the person</h2><p>People with active reactions are at high risk of permanent damage, and of distress.</p></div></div>
+    <div class="ch-head"><div class="ch-num">4</div><div><h2>How to manage complications and mental health</h2><p>People with active reactions are at high risk of permanent damage, and of distress.</p></div></div>
     <div class="grid3">
       <div class="card"><h4>Prevent disability</h4><ul class="clean"><li>Teach self-care for numb hands and feet</li><li>Splint the limb to rest an inflamed nerve</li><li>Gentle active exercise as pain eases</li><li>Passive exercise to keep joints moving</li><li>Details in LG4</li></ul></div>
       <div class="card"><h4>Messages for every person</h4><ul class="clean"><li>A reaction does not mean MDT has failed</li><li>Reactions can be treated; ENL eventually stops</li><li>Come back at once if it gets worse</li><li>Involve family; consider peer support</li></ul></div>
@@ -432,7 +438,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 
   <!-- 7 PAIN -->
   <section class="ch" id="pain">
-    <div class="ch-head"><div class="ch-num">7</div><div><h2>Neuropathic pain</h2><p>A long-term result of nerve damage, often after MDT is finished.</p></div></div>
+    <div class="ch-head"><div class="ch-num">5</div><div><h2>How to manage neuropathic pain</h2><p>A long-term result of nerve damage, often after MDT is finished.</p></div></div>
     <div class="grid2">
       <div class="card"><h4>Neuropathic pain</h4><ul class="clean"><li>Tingling, burning, shooting or pricking pain</li><li><b>No</b> nerve tenderness</li><li><b>No</b> new NFI</li><li>Often after MDT</li></ul></div>
       <div class="card"><h4>Leprosy reaction</h4><ul class="clean"><li>Tender nerve</li><li>New or worse loss of feeling or strength</li><li>Inflamed patches or ENL nodules</li><li>Before, during or after MDT</li></ul></div>
@@ -453,7 +459,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 
   <!-- 8 LOOKUP -->
   <section class="ch" id="lookup">
-    <div class="ch-head"><div class="ch-num">8</div><div><h2>Quick look-up</h2><p>Steroid side effects, when to refer, and what to tell every person.</p></div></div>
+    <div class="ch-head"><div class="ch-num" style="font-size:14px">A&#8211;Z</div><div><h2>Quick look-up</h2><p>Steroid side effects, when to refer, and what to tell every person.</p></div></div>
     <h3>Steroid side effects: check at every visit</h3>
     <div class="tbl"><table>
       <thead><tr><th>Sign</th><th>What to do</th></tr></thead>
